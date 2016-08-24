@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html ng-app='myApp'>
+<head> 
+    <meta charset="UTF-8">
+    <title>TODO: Title goes here</title>
+    <meta name="description" content="TODO: description goes here ">
+    <link rel="stylesheet" type="text/css" href="AmandaTemplate.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script type="text/javascript">
+        var myAppModule = angular.module('myApp', []);
+        
+        // the .controller() method adds a controller to the module
+        myAppModule.controller('pupilsController', function ($scope){
+          $scope.pupils = [
+            {name: 'Mike', age: 34}, 
+            {name: 'John', age: 24}, 
+            {name: 'Trey', age: 24}, 
+            {name: 'India', age: 35}
+          ];
+          //adding to the list
+          $scope.addPupils = function(){
+          $scope.pupils.push($scope.newPupils);
+          $scope.newPupils = {};
+       }
+      });
+
+        myApp.controller('friendsController', function ($scope){
+        // we don't need a factory for this demo, it wouldn't make a difference if we did.
+        $scope.friends = [
+            {name:'John', age: 25.9, gender:'boy'},
+            {name:'Jessie', age: 30.8, gender:'girl'},
+            {name:'Johanna', age: 28.1, gender:'girl'},
+            {name:'Joy', age: 15.5, gender:'girl'},
+            {name:'Mary', age: 28.5, gender:'girl'},
+            {name:'Peter', age: 95.1, gender:'boy'},
+            {name:'Sebastian', age: 50.5, gender:'boy'},
+            {name:'Erika', age: 27.2, gender:'girl'},
+            {name:'Patrick', age: 40.3, gender:'boy'},
+            {name:'Samantha', age: 60.2, gender:'girl'}
+        ];
+    })
+    </script>
+</head>
+<body>  
+    <div class="container">
+        <div class="header">
+            <h1><span>(Angular) </span> Platform Sample</h1>
+            <h3>Assigment - optional</h3>
+            <div class="descr">
+                <p>Assigment description:</p> 
+                <p>The platform sowing parts of sample code and I want to use them</p>
+                <p>Rule one module per one app</p>
+            </div>
+        </div><!-- end of header content-->
+        <div class="maincontent">
+            <div class="lists" ng-controller='pupilsController'>
+                <h4>This list uses $scope and ng-controller</h4>
+                <ul>
+                    <li ng-repeat="pupil in pupils">{{pupil.name}} : {{pupil.age}}</li>
+                </ul>
+                <h3>Add a new student!</h3>
+                <form>
+                    Name: <input type='text' ng-model='newPupils.name'>
+                    Age: <input type='text' ng-model='newPupils.age'>
+                    <input type='submit' value='add new pupil' ng-click='addPupils()'>
+                </form>
+            </div>
+            <hr>
+            <div class="lists" ng-controller='friendsController'>
+                <h3>This is showing filters</h3>
+                Search Friends: <input type="text" ng-model="filter_name">
+                <ul>
+                    <li ng-repeat="friend in friends | filter:filter_name | orderBy:'name'">
+                      {{ friend.name }} - age {{ friend.age | number:0 }}, gender {{ friend.gender | uppercase }}
+                    </li>
+                </ul>
+            </div>
+
+        </div><!-- end of main content-->
+        <div class="footer">
+            <p>created by: Amanda Fry</p>
+            <a class="footerSpace" href="mailto:FeAmandaF@hotmail.com">FeAmandaF@hotmial.com</a>
+            <a href="https://www.linkedin.com/in/amandafry1">Amanda's LinkedIn profile</a>
+        </div><!-- end of footer -->
+      </div><!-- end of container -->
+</body>
+</html>

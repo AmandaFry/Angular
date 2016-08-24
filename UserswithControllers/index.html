@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html ng-app='myApp'>
+<head> 
+    <meta charset="UTF-8">
+	<title>TODO: Title goes here</title>
+	<meta name="description" content="TODO: description goes here ">
+	<link rel="stylesheet" type="text/css" href="AmandaTemplate.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script type="text/javascript">
+        var myAppModule = angular.module('myApp', []);
+        myApp.controller('userController',function($scope){
+            $scope.users = [
+                {first_name:"Yikihiro", last_name:"Matsumoto", lang:"Ruby"},
+                {first_name:"Ryan", last_name:"Dahl", lang:"JavaScript"},
+                {first_name:"Brendan", last_name:"Eich", lang:"JavaScript"},
+            ];
+            $scope.createUser = function(){
+                $scope.users.push($scope.newUser);
+                $scope.newUser = {};
+            }
+            
+            $scope.deleteUser = function(user){
+                $scope.users.splice($scope.users.indexOf(user),1);
+            }
+        });
+    </script>
+
+</head>
+
+<body>	
+    <div class="container">
+        <div class="header">
+            <h1><span>(Angular) </span> Users with Controllers</h1>
+            <h3>Assigment X - mandatory/optional</h3>
+            <div class="descr">
+                <p>Assigment description:</p>
+                <p>Assigment description:</p>
+                <p>palceholder</p>
+                <ul>
+                    <li>listOne</li>
+                    <li>listTwo</li>
+                    <li>listThree</li>
+                </ul>
+            </div>
+        </div><!-- end of header content-->
+        <div class="maincontent">
+            <div ng-controller='userController'>
+                <form class="form-group">
+                    <label>First Name</label>
+                    <input class="form-control" type="text" style="width: 25%;" ng-model='newUser.first_name'></input>
+                    <label>Last Name</label>
+                    <input class="form-control" type="text" style="width: 25%;" ng-model='newUser.last_name'></input>
+                    <label>Favorite Language</label>
+                    <input class="form-control" type="text" style="width: 25%;" ng-model='newUser.lang'></input><br>
+                    <input type="submit" ng-click='createUser()' value="Create User"></input>
+                </form><br>
+                <table class="table table-striped" style="border:1px solid tan;">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Fav Language</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='user in users'>
+                            <td>{{user.first_name}}</td>
+                            <td>{{user.last_name}}</td>
+                            <td>{{user.lang}}</td>
+                            <td><button ng-click='deleteUser(user)'>Delete User</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- end of main content-->
+        <div class="footer">
+            <p>created by: Amanda Fry</p>
+            <a class="footerSpace" href="mailto:FeAmandaF@hotmail.com">FeAmandaF@hotmial.com</a>
+            <a href="https://www.linkedin.com/in/amandafry1">Amanda's LikedIn profile</a>
+        </div><!-- end of footer -->
+      </div><!-- end of container -->
+</body>
+</html>
